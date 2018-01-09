@@ -13,22 +13,22 @@ class Region(object):
         self.region = None
         self.bounding_region = None
 
-    def set_region(self, region):
+    def set_region(self, vertices):
         """
         Sets the region for image registration.
-        :param region:
-        :type region: model.Rectangle
+        :param vertices:
+        :type vertices: a list of model.Vertex
 
         :return:
         """
-        self.region = region
+        self.region = vertices
 
-    def set_bounding_region(self, region):
+    def set_bounding_region(self, vertices):
         """
         Sets the bounding region for image registration
-        :param region:
-        :type region:
+        :param vertices:
+        :type vertices:
 
         :return:
         """
-        self.bounding_region = region
+        self.bounding_region = vertices
