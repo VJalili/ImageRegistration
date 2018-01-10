@@ -79,6 +79,15 @@ class ImageRegistration(object):
         except ParseError as e:
             raise ParseError("Invalid configuration at `{}`: {} -- unable to continue.".format(config, e.message))
 
+    def _read_nuclei_image(self, image_file, regions, channel):
+        """
+
+        :param image_file:
+        :param regions:
+        :param channel:
+        :return: image
+        """
+
     def analyze(self, image_file, channel):
         """
         function description goes here ...
@@ -86,7 +95,7 @@ class ImageRegistration(object):
         :type image_file: what is the type, e.g., string ? File?
 
         :param channel: what is a channel ?
-        :type channel:
+        :type channel: model.Channels
 
         :return: what does this function return ?
         """
