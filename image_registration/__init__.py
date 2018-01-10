@@ -5,6 +5,8 @@ import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import ParseError
 from .model.vertex import *
 from .model.region import *
+from .model.channels import *
+from .model.image import *
 
 
 class ImageRegistration(object):
@@ -18,7 +20,7 @@ class ImageRegistration(object):
         :type nuclei_file:
         """
         self.regions = self._parse_config_xml(config)
-        self._nuclei_file = nuclei_file
+        self.nuclei_image = self._read_nuclei_image(nuclei_file, self.regions, Channels.BLUE)
 
     def _parse_config_xml(self, config):
         """
@@ -83,10 +85,20 @@ class ImageRegistration(object):
         """
 
         :param image_file:
+        :type image_file:
+
         :param regions:
+        :type regions:
+
         :param channel:
-        :return: image
+        :type channel: model.Channels
+
+        :return: nuclei image
+        :type: model.Image
         """
+        image = Image(regions=regions)
+        # TODO: read the nuclei image with given regions and channel, then return it.
+        return image
 
     def analyze(self, image_file, channel):
         """
