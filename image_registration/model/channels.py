@@ -7,11 +7,11 @@ a short description for channels ...
 class Channels(object):
     channels = {
         # Gray channel:
-        'CD20': "Gray", 'CD56': "Gray", 'RORGT': "Gray", 'P16': "Gray", 'CD3': "Gray",
+        'CD20': 'Gray', 'CD56': 'Gray', 'RORGT': 'Gray', 'P16': 'Gray', 'CD3': 'Gray',
 
         # Red channel:
-        'FOXP3': "Red", 'CK5': "Red", 'CK14': "Red", 'PDL1': "Red", 'PD-L1': "Red",
-        'PD1': "Red", 'MHC II': "Red", 'MHCII': "Red", 'DC-SIGN': "Red", 'CK19': "Red", 'F480': "Red",
+        'FOXP3': 'Red', 'CK5': 'Red', 'CK14': 'Red', 'PDL1': 'Red', 'PD-L1': 'Red',
+        'PD1': 'Red', 'MHC II': 'Red', 'MHCII': 'Red', 'DC-SIGN': 'Red', 'CK19': 'Red', 'F480': 'Red',
 
         # Gree channel:
         'DC LAMP': 'Green', 'DC-LAMP': 'Green', 'CD83': 'Green', 'CD11C': 'Green', 'TIM3': 'Green',
