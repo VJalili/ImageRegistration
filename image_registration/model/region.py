@@ -71,6 +71,19 @@ class Region(object):
         self.pixels = [[Pixel(0, 0, 0) for x in range(w)] for y in range(h)]
 
     def set_pixel(self, x, y, pixel):
+        """
+        Sets the pixel of this region at x and y to pixel.
+        :param x: x position on the image (should be within the boundary of bounding region.
+        :type x: integer
+
+        :param y: y position on the image (should be within the boundary of bounding region.
+        :type y: integer
+
+        :param pixel: the new pixel value.
+        :type pixel: model.Pixel
+
+        :return: void
+        """
         self.pixels[x][y] = pixel
 
 
