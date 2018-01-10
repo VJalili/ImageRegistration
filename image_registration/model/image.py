@@ -9,10 +9,19 @@ class Image(object):
         """
 
         :param marker:
+        :type marker:
+
         :param regions:
+        :type regions: a list of model.Region
+
         :param width:
+        :type width:
+
         :param height:
+        :type height:
+
         :param level:
+        :type level:
         """
         self.marker = marker
         self.regions = regions
