@@ -3,6 +3,9 @@ some description of what this package does.
 """
 import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import ParseError
+from .model.vertex import *
+from .model.region import *
+
 
 class ImageRegistration(object):
     def __init__(self, config, nuclei_file):
@@ -25,26 +28,31 @@ class ImageRegistration(object):
 
         :return: void
         """
-        self.regions = {}
+        self.regions = []
         try:
             tree = ET.parse(config)
             root = tree.getroot()
             if root.tag != "Annotations":
                 raise ParseError("Invalid root element `{}`!".format(root.tag))
-            for annotation in root:
-                if annotation.tag != "Annotation":
-                    raise ParseError("Invalid child tag `{}`!".format(annotation.tag))
-                regions = annotation.findall("Regions")
-                if len(regions) != 1:
+            for et_annotation in root:
+                if et_annotation.tag != "Annotation":
+                    raise ParseError("Invalid child tag `{}`!".format(et_annotation.tag))
+                et_regions = et_annotation.findall("Regions")
+                if len(et_regions) != 1:
                     raise ParseError("Expect exactly one `Regions` element per `Annotation` element, found `{}` "
-                                     "elements.".format(len(regions)))
-                for region in regions[0].findall("Region"):
-                    vertices = region.findall("Vertices")
-                    if len(vertices) != 1:
+                                     "elements.".format(len(et_regions)))
+                regions_count = len(et_regions[0].findall("Region"))
+                if regions_count % 2 != 0:
+                    raise ParseError("Expect even number of regions per each Region element, found `{}` "
+                                     "elements".format(regions_count))
+                parsed_regions = 0
+                for et_region in et_regions[0].findall("Region"):
+                    et_vertices = et_region.findall("Vertices")
+                    if len(et_vertices) != 1:
                         raise ParseError("Expect exactly one `Vertices` element per `Region` element, found `{}` "
-                                         "elements.".format(len(vertices)))
-                    region_vertices = []
-                    for vertex in vertices[0]:
+                                         "elements.".format(len(et_vertices)))
+                    vertices = []
+                    for vertex in et_vertices[0]:
                         for item in vertex.items():
                             if item[0].lower() == "x":
                                 x = item[1]
@@ -53,10 +61,18 @@ class ImageRegistration(object):
                             if item[0].lower() == "z":
                                 z = item[1]
                         try:
-                            region_vertices.append(Vertex(x ,y, z))
+                            vertices.append(Vertex(x, y, z))
                         except NameError:
                             raise ParseError("The vertex `{}` does not have X and/or Y coordinate(s)".format(vertex.items()))
-
+                    parsed_regions += 1
+                    if parsed_regions > regions_count / 2:
+                        # add bounding regions
+                        self.regions[parsed_regions - (regions_count / 2) - 1].set_bounding_region(vertices)
+                    else:
+                        # add regions
+                        region = Region("")
+                        region.set_region(vertices)
+                        self.regions.append(region)
         except ImportError:
             raise
         except ParseError as e:
