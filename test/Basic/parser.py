@@ -1,5 +1,4 @@
 import unittest
-import image_registration
 
 
 class TestXMLParser(unittest.TestCase):
