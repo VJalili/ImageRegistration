@@ -70,7 +70,7 @@ class ImageRegistration(object):
                         regions[parsed_regions - (regions_count / 2) - 1].set_bounding_region(vertices)
                     else:
                         # add regions
-                        region = Region("")
+                        region = Region(et_region.get("Id"))
                         region.set_region(vertices)
                         regions.append(region)
             return regions
