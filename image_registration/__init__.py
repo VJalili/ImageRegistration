@@ -17,7 +17,7 @@ class ImageRegistration(object):
         :param nuclei_file:
         :type nuclei_file:
         """
-        self._parse_config_xml(config)
+        self.regions = self._parse_config_xml(config)
         self._nuclei_file = nuclei_file
 
     def _parse_config_xml(self, config):
@@ -26,9 +26,9 @@ class ImageRegistration(object):
         :param config:
         :type config:
 
-        :return: void
+        :return: A list of model.Region
         """
-        self.regions = []
+        regions = []
         try:
             tree = ET.parse(config)
             root = tree.getroot()
@@ -67,12 +67,13 @@ class ImageRegistration(object):
                     parsed_regions += 1
                     if parsed_regions > regions_count / 2:
                         # add bounding regions
-                        self.regions[parsed_regions - (regions_count / 2) - 1].set_bounding_region(vertices)
+                        regions[parsed_regions - (regions_count / 2) - 1].set_bounding_region(vertices)
                     else:
                         # add regions
                         region = Region("")
                         region.set_region(vertices)
-                        self.regions.append(region)
+                        regions.append(region)
+            return regions
         except ImportError:
             raise
         except ParseError as e:
