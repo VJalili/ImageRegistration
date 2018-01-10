@@ -70,4 +70,7 @@ class Region(object):
         w, h = self._get_width_and_height(vertices)
         self.pixels = [[Pixel(0, 0, 0) for x in range(w)] for y in range(h)]
 
+    def set_pixel(self, x, y, pixel):
+        self.pixels[x][y] = pixel
+
 
