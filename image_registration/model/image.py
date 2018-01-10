@@ -5,7 +5,7 @@ some brief description about this class.
 
 class Image(object):
 
-    def __init__(self, marker, regions, width, height, level):
+    def __init__(self, marker=None, regions=None, width=None, height=None, level=None):
         """
 
         :param marker:
