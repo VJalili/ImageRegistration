@@ -82,7 +82,7 @@ class ImageRegistration(object):
     def analyze(self, image_file, channel):
         """
         function description goes here ...
-        :param image_file: what is an image file ?
+        :param image_file: what is an image file ? marker ?
         :type image_file: what is the type, e.g., string ? File?
 
         :param channel: what is a channel ?
