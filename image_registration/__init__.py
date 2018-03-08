@@ -24,7 +24,7 @@ class ImageRegistration(object):
 
     def _parse_config_xml(self, config):
         """
-
+        This parses xml regions
         :param config:
         :type config:
 
