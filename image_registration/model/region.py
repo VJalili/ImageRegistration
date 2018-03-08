@@ -28,14 +28,14 @@ class Region(object):
         # Determine the upper-right corner of the rectangle from the list of vertices.
         ur = Vertex(x=0, y=sys.maxint, z=sys.maxint)
         for vertex in vertices:
-            if vertex.x > ur.x and vertex.y < ur.y:
+            if vertex.x > ur.x and vertex.y <= ur.y:
                 ur.x = vertex.x
                 ur.y = vertex.y
 
         # Determine the lower-left corner of the rectangle from a the list of vertices.
         ll = Vertex(x=sys.maxint, y=0, z=sys.maxint)
         for vertex in vertices:
-            if vertex.x < ll.x and vertex.y > ll.y:
+            if vertex.x <= ll.x and vertex.y > ll.y:
                 ll.x = vertex.x
                 ll.y = vertex.y
 
@@ -45,7 +45,6 @@ class Region(object):
             if vertex.x > lr.x and vertex.y > lr.y:
                 lr.x = vertex.x
                 lr.y = vertex.y
-
         return ur.x - ul.x, ll.y-ul.y
 
     @classmethod
@@ -96,7 +95,7 @@ class Region(object):
         """
         self.bounding_region = vertices
         w, h = self._get_width_and_height(vertices)
-        self.pixels = [[Pixel(0, 0, 0) for x in range(w)] for y in range(h)]
+        self.pixels = [[Pixel(0, 0, 0) for x in range(int(w))] for y in range(int(h))]
 
     def set_pixel(self, x, y, pixel):
         """

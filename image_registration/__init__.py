@@ -58,11 +58,11 @@ class ImageRegistration(object):
                         z = None
                         for item in vertex.items():
                             if item[0].lower() == "x":
-                                x = item[1]
+                                x = float(item[1])
                             if item[0].lower() == "y":
-                                y = item[1]
+                                y = float(item[1])
                             if item[0].lower() == "z":
-                                z = item[1]
+                                z = float(item[1])
                         try:
                             vertices.append(Vertex(x, y, z))
                         except NameError:
