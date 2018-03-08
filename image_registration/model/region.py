@@ -48,6 +48,28 @@ class Region(object):
 
         return ur.x - ul.x, ll.y-ul.y
 
+    @classmethod
+    def _get_location(cls, region):
+        """
+        Gets the location of the given region, which is its upper-left corner.
+
+        :rtype: tuple
+        :return: a tuple containing the coordinates of upper-left corner of bounding box.
+        """
+        x = sys.maxint
+        y = sys.maxint
+        for vertex in region:
+            if float(vertex.x) < x and float(vertex.y) < y:
+                x = float(vertex.x)
+                y = float(vertex.y)
+        return x, y
+
+    def get_region_location(self):
+        return self._get_location(self.region)
+
+    def get_bounding_region_location(self):
+        return self._get_location(self.bounding_region)
+
     def set_region(self, vertices):
         """
         Sets the region for image registration.
