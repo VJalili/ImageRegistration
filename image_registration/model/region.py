@@ -70,6 +70,12 @@ class Region(object):
     def get_bounding_region_location(self):
         return self._get_location(self.bounding_region)
 
+    def get_region_size(self):
+        return self._get_width_and_height(self.region)
+
+    def get_bounding_region_size(self):
+        return self._get_width_and_height(self.bounding_region)
+
     def set_region(self, vertices):
         """
         Sets the region for image registration.
