@@ -55,6 +55,7 @@ class ImageRegistration(object):
                                          "elements.".format(len(et_vertices)))
                     vertices = []
                     for vertex in et_vertices[0]:
+                        z = None
                         for item in vertex.items():
                             if item[0].lower() == "x":
                                 x = item[1]
