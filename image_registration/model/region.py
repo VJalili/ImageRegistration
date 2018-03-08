@@ -96,7 +96,7 @@ class Region(object):
         """
         self.bounding_region = vertices
         w, h = self._get_width_and_height(vertices)
-        self.pixels = [[Pixel(0, 0, 0) for x in range(w)] for y in range(h)]
+        self.pixels = [[Pixel(0, 0, 0) for x in range(int(w))] for y in range(int(h))]
 
     def set_pixel(self, x, y, pixel):
         """
