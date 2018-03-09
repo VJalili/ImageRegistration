@@ -21,8 +21,7 @@ class ImageRegistration(object):
         :type nuclei_file:
         """
         self.regions = self._parse_config_xml(config)
-        for region in self.regions:
-            self.nuclei_image = self._read_nuclei_image(nuclei_file, region, Channels.BLUE)
+        self.nuclei_file = nuclei_file
 
     def _parse_config_xml(self, config):
         """
@@ -117,4 +116,5 @@ class ImageRegistration(object):
 
         :return: what does this function return ?
         """
-        print "another thing"
+        for region in self.regions:
+            self.nuclei_image = self._read_nuclei_image(self.nuclei_file, region, Channels.BLUE)
