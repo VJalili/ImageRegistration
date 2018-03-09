@@ -11,6 +11,10 @@ from .model.image import *
 
 
 class ImageRegistration(object):
+    """
+    TODO: a brief description of the class.
+    """
+
     def __init__(self, config, nuclei_file):
         """
         a brief description goes here ...
