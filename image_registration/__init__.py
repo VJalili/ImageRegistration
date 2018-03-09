@@ -81,7 +81,7 @@ class ImageRegistration(object):
                     else:
                         # add regions
                         region = Region(et_region.get("Id"))
-                        region.set_region(vertices)
+                        region.set_roi(vertices)
                         regions.append(region)
             return regions
         except ImportError:
@@ -104,9 +104,9 @@ class ImageRegistration(object):
         """
         slide = open_slide(image_file)
         image = slide.read_region(
-           location=region.get_region_location(),
+           location=region.get_roi_location(),
            level=1,
-           size=region.get_region_size())
+           size=region.get_roi_size())
         return image
 
     def analyze(self, image_file, channel):
