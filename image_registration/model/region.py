@@ -2,7 +2,6 @@
 TODO: a brief description of region
 """
 import sys
-from pixel import *
 from vertex import *
 
 
