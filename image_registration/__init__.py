@@ -100,7 +100,7 @@ class ImageRegistration(object):
         :type region:
 
         :return: nuclei image
-        :type: model.Image
+        :type: PIL.Image.Image
         """
         slide = open_slide(image_file)
         image = slide.read_region(
