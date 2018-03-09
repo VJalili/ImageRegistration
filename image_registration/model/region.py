@@ -58,9 +58,9 @@ class Region(object):
         x = sys.maxint
         y = sys.maxint
         for vertex in region:
-            if float(vertex.x) < x and float(vertex.y) < y:
-                x = float(vertex.x)
-                y = float(vertex.y)
+            if vertex.x < x and vertex.y < y:
+                x = vertex.x
+                y = vertex.y
         return x, y
 
     def get_region_location(self):
