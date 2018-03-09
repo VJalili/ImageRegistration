@@ -17,7 +17,8 @@ class Region(object):
         self.bounding_region = None
         self.pixels = None
 
-    def _get_width_and_height(self, vertices):
+    @classmethod
+    def _get_width_and_height(cls, vertices):
         # Determine the upper-level corner of the rectangle from the list of vertices.
         ul = Vertex(x=sys.maxint, y=sys.maxint, z=sys.maxint)
         for vertex in vertices:

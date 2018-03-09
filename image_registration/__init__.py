@@ -11,6 +11,10 @@ from .model.image import *
 
 
 class ImageRegistration(object):
+    """
+    TODO: a brief description of the class.
+    """
+
     def __init__(self, config, nuclei_file):
         """
         a brief description goes here ...
@@ -22,8 +26,10 @@ class ImageRegistration(object):
         """
         self.regions = self._parse_config_xml(config)
         self.nuclei_file = nuclei_file
+        self.nuclei_image = None
 
-    def _parse_config_xml(self, config):
+    @classmethod
+    def _parse_config_xml(cls, config):
         """
         This parses xml regions
         :param config:
@@ -83,7 +89,8 @@ class ImageRegistration(object):
         except ParseError as e:
             raise ParseError("Invalid configuration at `{}`: {} -- unable to continue.".format(config, e.message))
 
-    def _read_nuclei_image(self, image_file, region, channel):
+    @classmethod
+    def _read_nuclei_image(cls, image_file, region):
         """
 
         :param image_file:
@@ -91,9 +98,6 @@ class ImageRegistration(object):
 
         :param region:
         :type region:
-
-        :param channel:
-        :type channel: model.Channels
 
         :return: nuclei image
         :type: model.Image
@@ -117,4 +121,4 @@ class ImageRegistration(object):
         :return: what does this function return ?
         """
         for region in self.regions:
-            self.nuclei_image = self._read_nuclei_image(self.nuclei_file, region, Channels.BLUE)
+            self.nuclei_image = self._read_nuclei_image(self.nuclei_file, region)
