@@ -23,7 +23,8 @@ class ImageRegistration(object):
         self.regions = self._parse_config_xml(config)
         self.nuclei_file = nuclei_file
 
-    def _parse_config_xml(self, config):
+    @classmethod
+    def _parse_config_xml(cls, config):
         """
         This parses xml regions
         :param config:
@@ -83,7 +84,8 @@ class ImageRegistration(object):
         except ParseError as e:
             raise ParseError("Invalid configuration at `{}`: {} -- unable to continue.".format(config, e.message))
 
-    def _read_nuclei_image(self, image_file, region, channel):
+    @classmethod
+    def _read_nuclei_image(cls, image_file, region, channel):
         """
 
         :param image_file:
