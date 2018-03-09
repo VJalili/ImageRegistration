@@ -3,6 +3,7 @@ some description of what this package does.
 """
 import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import ParseError
+from openslide import open_slide
 from .model.vertex import *
 from .model.region import *
 from .model.channels import *
@@ -20,7 +21,7 @@ class ImageRegistration(object):
         :type nuclei_file:
         """
         self.regions = self._parse_config_xml(config)
-        self.nuclei_image = self._read_nuclei_image(nuclei_file, self.regions, Channels.BLUE)
+        self.nuclei_file = nuclei_file
 
     def _parse_config_xml(self, config):
         """
@@ -82,14 +83,14 @@ class ImageRegistration(object):
         except ParseError as e:
             raise ParseError("Invalid configuration at `{}`: {} -- unable to continue.".format(config, e.message))
 
-    def _read_nuclei_image(self, image_file, regions, channel):
+    def _read_nuclei_image(self, image_file, region, channel):
         """
 
         :param image_file:
         :type image_file:
 
-        :param regions:
-        :type regions:
+        :param region:
+        :type region:
 
         :param channel:
         :type channel: model.Channels
@@ -97,8 +98,11 @@ class ImageRegistration(object):
         :return: nuclei image
         :type: model.Image
         """
-        image = Image(regions=regions)
-        # TODO: read the nuclei image with given regions and channel, then return it.
+        slide = open_slide(image_file)
+        image = slide.read_region(
+           location=region.get_region_location(),
+           level=1,
+           size=region.get_region_size())
         return image
 
     def analyze(self, image_file, channel):
@@ -112,4 +116,5 @@ class ImageRegistration(object):
 
         :return: what does this function return ?
         """
-        print "another thing"
+        for region in self.regions:
+            self.nuclei_image = self._read_nuclei_image(self.nuclei_file, region, Channels.BLUE)
