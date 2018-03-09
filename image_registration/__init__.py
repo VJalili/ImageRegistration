@@ -22,6 +22,7 @@ class ImageRegistration(object):
         """
         self.regions = self._parse_config_xml(config)
         self.nuclei_file = nuclei_file
+        self.nuclei_image = None
 
     @classmethod
     def _parse_config_xml(cls, config):
